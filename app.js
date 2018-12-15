@@ -8,11 +8,10 @@ const Router = require('koa-router');
 const router = new Router() ;
 const baseRouter = require('./router/index.js');
 const co = require('co');
+const send = require('koa-send')
+
 
 /********  Begin 配置 session *********/
-
-
-
 app.context.render = co.wrap(render({// 配置swg
     root: path.join(__dirname, 'views'),
     autoescape: true,
@@ -25,12 +24,11 @@ app.context.render = co.wrap(render({// 配置swg
     // extensions: extensions,
     writeBody: false
 }));
+
+baseRouter(router,send);//加载前段页面路由
 app.use(static(//加载静态资源
     path.join( __dirname,  staticPath)
 ));
-
-baseRouter(router);//加载前段页面路由
-
 app.use(router.routes())
     .use(router.allowedMethods())
 //     .use(async (ctx) => {
