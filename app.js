@@ -9,7 +9,7 @@ const router = new Router() ;
 const baseRouter = require('./router/index.js');
 const co = require('co');
 const send = require('koa-send')
-
+const Port = 4000 ; // 端口
 
 /********  Begin 配置 session *********/
 app.context.render = co.wrap(render({// 配置swg
@@ -38,9 +38,7 @@ app.use(router.routes())
 // }
 // })
 
-app.listen(80,()=>{
-    console.log('----------前台node服务启动成功，端口： 80');
-});
-app.listen(4001,()=>{
-    console.log('----------前台node服务启动成功，端口： 4001');
+
+app.listen(Port,()=>{
+    console.log(`----------前台node服务启动成功，端口： ${Port}`);
 });
